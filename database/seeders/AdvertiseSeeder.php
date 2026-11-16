@@ -11,19 +11,32 @@ class AdvertiseSeeder extends Seeder
 
     public function run(): void
     {
+        // Remove the old ads so there are no duplicates
+        Advertise::query()->delete();
+
         $companies = [
-            'Himalayan Bank', 'Ncell Axiata', 'Nepal Telecom', 'Daraz Nepal', 'Yeti Airlines',
-            'Chaudhary Group', 'Hotel Annapurna', 'Sajilo Mart', 'Kathmandu University', 'Buddha Air',
+            'Himalayan Bank'       => 'https://www.himalayanbank.com',
+            'Ncell Axiata'         => 'https://www.ncell.axiata.com',
+            'Nepal Telecom'        => 'https://www.ntc.net.np',
+            'Daraz Nepal'          => 'https://www.daraz.com.np',
+            'Yeti Airlines'        => 'https://www.yetiairlines.com',
+            'Chaudhary Group'      => 'https://www.chaudharygroup.com',
+            'Hotel Annapurna'      => 'https://www.annapurna.com.np',
+            'Sajilo Mart'          => 'https://www.sajilomart.com',
+            'Kathmandu University' => 'https://ku.edu.np',
+            'Buddha Air'           => 'https://www.buddhaair.com',
         ];
 
-        foreach ($companies as $i => $company) {
+        $i = 0;
+        foreach ($companies as $company => $link) {
             Advertise::forceCreate([
                 'company_name' => $company,
                 'contact_no' => '98' . str_pad((string) (41000000 + $i * 137531), 8, '0', STR_PAD_LEFT),
                 'expiry_date' => now()->addDays(30 * ($i + 1))->toDateString(),
                 'banner' => self::BANNER,
-                'redirect_link' => 'https://example.com/' . str($company)->slug(),
+                'redirect_link' => $link,
             ]);
+            $i++;
         }
     }
 }
