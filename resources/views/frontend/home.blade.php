@@ -1,4 +1,14 @@
 <x-frontend-layout>
-    <h2 class="text-[red]">THis is home page.</h2>
-    <p class="text-(--primary)" >HEllo this is babita.2026</p>
+
+    <section>
+        <div class="container py-8">
+            <div class="shadow-lg p-4 rounded-2xl">
+                <a href="">
+                    <h1 class="text-4xl font-bold mb-4">{{ $article->title }}</h1>
+                    <img src="{{ asset(Storage::url($article->image)) }}" alt="{{ $article->title }}">
+                </a>
+
+            </div>
+        </div>
+    </section>
 </x-frontend-layout>

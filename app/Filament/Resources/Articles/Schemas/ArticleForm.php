@@ -39,8 +39,10 @@ class ArticleForm
                                     ->columnSpanFull(),
                             ])
 
-
                             ->default(null),
+                             Select::make('author')
+                             ->relationship('author','name')
+                            ->required(),
                         FileUpload::make('image')
                             ->image()
                             ->required(),
